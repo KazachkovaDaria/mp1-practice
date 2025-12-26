@@ -6,7 +6,8 @@
 
 #define MAX_PATH_LEN 260
 
-
+//ИСПРАВИТЬ НАЛИЧИЕ ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ
+//МЫ ДОЛЖНЫ ВСЕГДА ПЕРЕДАВАТЬ ЗНАЧЕНИЯ В ФУНКЦИЯХ СОРТИРОВКИ
 char** fileNames = NULL;
 long long* fileSizes = NULL;
 int fileCount = 0;
@@ -20,25 +21,25 @@ void сhoiceSort();
 void insertionSort();
 void merge(int left, int mid, int right);
 void mergeSort(int left, int right);
-void quickSort(int low, int high);
+void quickSort(int left, int right);
 
 int main() {
     setlocale(LC_ALL, "Russian");
     char path[MAX_PATH_LEN];
-    char input[16];
+    char input[260];
 
     LARGE_INTEGER freq, start, end;
     QueryPerformanceFrequency(&freq);
 
-    printf("Введите путь к каталогу:\n");
+    printf_s("Введите путь к каталогу:\n");
     fgets(path, MAX_PATH_LEN, stdin);
     path[strcspn(path, "\n")] = 0;
 
-    if (!loadFiles(path))
+    if (loadFiles(path))
         return 0;
 
     while (1) {
-        printf(
+        printf_s(
             "\n1 - Пузырёк\n"
             "2 - Выбором\n"
             "3 - Вставками\n"
@@ -48,16 +49,17 @@ int main() {
             "Ваш выбор: "
         );
 
-        if (!fgets(input, sizeof(input), stdin))
+        if (!fgets(input, sizeof(input), stdin)) {
             continue;
+        }   
 
         input[strcspn(input, "\n")] = '\0';
 
         char* end1;
-        int choice = (int)strtol(input, &end1, 10);
+        int choice = strtol(input, &end1, 10);
 
         if (end1 == input || *end1 != '\0') {
-            printf("Ошибка: введите число от 0 до 5\n");
+            printf_s("Ошибка: введите число от 0 до 5\n");
             continue;
         }
 
@@ -73,14 +75,13 @@ int main() {
         case 4: mergeSort(0, fileCount - 1); break;
         case 5: quickSort(0, fileCount - 1); break;
         default:
-            printf("Неверный номер сортировки\n");
             continue;
         }
 
         QueryPerformanceCounter(&end);
         printFiles();
 
-        printf("\nВремя: %.6f сек\n",
+        printf_s("\nВремя: %.6f сек\n",
             (double)(end.QuadPart - start.QuadPart) / freq.QuadPart);
     }
 
@@ -108,7 +109,7 @@ int loadFiles(const char* path) {
     hFind = FindFirstFileA(searchPath, &findData);
     if (hFind == INVALID_HANDLE_VALUE) {
         printf("Ошибка: каталог не найден.\n");
-        return 0;
+        return 1;
     }
 
     fileCount = 0;
@@ -121,7 +122,7 @@ int loadFiles(const char* path) {
 
     if (fileCount == 0) {
         printf("В каталоге нет файлов.\n");
-        return 0;
+        return 1;
     }
 
     fileNames = malloc(fileCount * sizeof(char*));
@@ -145,7 +146,7 @@ int loadFiles(const char* path) {
     } while (FindNextFileA(hFind, &findData));
 
     FindClose(hFind);
-    return 1;
+    return 0;
 }
 
 
@@ -159,9 +160,6 @@ void freeMemory() {
     free(fileNames);
     free(fileSizes);
 
-    fileNames = NULL;
-    fileSizes = NULL;
-    fileCount = 0;
 }
 
 
@@ -169,7 +167,7 @@ void printFiles() {
     printf("\nИмя файла                              Размер (байт)\n");
     printf("---------------------------------------------------\n");
     for (int i = 0; i < fileCount; i++)
-        printf("%-35s %10lld\n", fileNames[i], fileSizes[i]);
+        printf("%-35s %18lld\n", fileNames[i], fileSizes[i]);
 }
 
 
