@@ -124,12 +124,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="additional.hpp" />
-    <ClInclude Include="list.hpp" />
+    <ClInclude Include="quote.hpp" />
+    <ClInclude Include="phrase_library.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="additional.cpp" />
-    <ClCompile Include="list.cpp" />
+    <ClCompile Include="quote.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="phrase_library.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="list.txt" />
