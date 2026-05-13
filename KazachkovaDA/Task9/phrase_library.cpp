@@ -61,11 +61,10 @@ phrase_library::phrase_library(const std::string& file_name)
 void phrase_library::find_quotes_by_key_words(const std::string keyword_request, phrase_library& founded)
 {
 	std::string lowercase_request = to_lowercase(keyword_request);
-	std::string lowercase_key_words;
 	int found_count = 0;
 	for (int i = 0; i < this->count; i++)
 	{
-		if (phrases[i].find_keywords(keyword_request))
+		if (phrases[i].find_keywords(lowercase_request))
 		{
 			found_count++;
 		}
@@ -86,8 +85,8 @@ void phrase_library::find_quotes_by_key_words(const std::string keyword_request,
 		if (phrases[i].find_keywords(keyword_request))
 		{
 			founded.phrases[j] = phrases[i];
+			j++;
 		}
-		j++;
 	}
 }
 

@@ -81,6 +81,7 @@ bool Quote::find_keywords(const std::string& _keyword_request) const
 		if (lowercase_key_words == _keyword_request)
 		{
 			return true;
+			break;
 		}
 	}
 	return false;
