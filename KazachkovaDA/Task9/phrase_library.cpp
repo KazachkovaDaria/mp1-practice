@@ -82,7 +82,7 @@ void phrase_library::find_quotes_by_key_words(const std::string keyword_request,
 	int j = 0;
 	for (int i = 0; i < this->count; i++)
 	{
-		if (phrases[i].find_keywords(keyword_request))
+		if (phrases[i].find_keywords(lowercase_request))
 		{
 			founded.phrases[j] = phrases[i];
 			j++;

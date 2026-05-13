@@ -48,7 +48,7 @@ Quote::Quote(const Quote& q)
 	}
 }
 
-Quote& Quote::operator=(const Quote& q) 
+const Quote& Quote::operator=(const Quote& q) 
 {
 
 	if (this == &q) {
@@ -81,7 +81,6 @@ bool Quote::find_keywords(const std::string& _keyword_request) const
 		if (lowercase_key_words == _keyword_request)
 		{
 			return true;
-			break;
 		}
 	}
 	return false;

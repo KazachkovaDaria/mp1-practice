@@ -2,10 +2,10 @@
 #include "phrase_library.hpp"
 #include "additional.hpp"
 
-int main() {
+int main(int argc, char* argv[]) {
 
-	const std::string file_name = "list.txt";
-	phrase_library quotes(file_name);
+	//const std::string file_name = "list.txt"; // argc argv
+	phrase_library quotes(argv[1]);
 	phrase_library founded;
 
 	std::string request_word;
