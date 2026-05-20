@@ -31,5 +31,5 @@ int main(int argc, char* argv[]) {
 		std::cout << founded;
 
 	} while (1);
-
+	return 0;
 }

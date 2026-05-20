@@ -58,7 +58,7 @@ phrase_library::phrase_library(const std::string& file_name)
 	}
 }
 
-void phrase_library::find_quotes_by_key_words(const std::string keyword_request, phrase_library& founded)
+void phrase_library::find_quotes_by_key_words(const std::string& keyword_request, phrase_library& founded)
 {
 	std::string lowercase_request = to_lowercase(keyword_request);
 	int found_count = 0;
