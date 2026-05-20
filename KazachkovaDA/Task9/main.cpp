@@ -3,8 +3,6 @@
 #include "additional.hpp"
 
 int main(int argc, char* argv[]) {
-
-	//const std::string file_name = "list.txt"; // argc argv
 	phrase_library quotes(argv[1]);
 	phrase_library founded;
 

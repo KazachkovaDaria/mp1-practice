@@ -18,7 +18,7 @@ public:
 	Quote(const std::string&, const std::string&, const std::string&, 
 		const std::string&, const std::string&);
 	Quote(const Quote&);
-	~Quote() { delete[] key_words; }
+	~Quote() { delete[] this->key_words; }
 	const Quote& operator=(const Quote&);
 	bool find_keywords(const std::string&) const;
 	friend std::ostream& operator<< (std::ostream&, const Quote&);
